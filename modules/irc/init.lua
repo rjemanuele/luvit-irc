@@ -149,13 +149,9 @@ function IRC.new ()
 						msg = 
 						self:emit ("action", w[3], msg)
 					else
-						local nick = w[1]
-						if w[3]:sub (1,1) == '#' then
-							nick = w[3]
-						else
-							nick = nick:sub (2, nick:find ("!")-1)
-						end
-						self:emit ("privmsg", nick, msg)
+						local orig = w[3]
+						local nick = w[1]:sub (2, nick:find ("!")-1)
+						self:emit ("privmsg", orig, msg, nick)
 					end
 				end
 			end
